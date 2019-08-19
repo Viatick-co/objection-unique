@@ -87,6 +87,10 @@ module.exports = options => {
             return queries;
           }
 
+          if (fields.some(fieldName => this[fieldName] === null || this[fieldName] === undefined)) {
+            return queries;
+          }
+
           const query = (
             fields.reduce(
               (subset, fieldName) => subset.where(fieldName, this[fieldName] || queryOptions.old[fieldName]),
